@@ -8,35 +8,35 @@ ShadowRaidLoud.Level_ID = "kosugi"
 ShadowRaidLoud.Message2OtherPlayers = "This lobby is running 'Shadow Raid Loud Mod'"
 ShadowRaidLoud.Message2WarnYou = "You're activating Shadow Raid Loud MOD. \n You should only play with your friends."
 
-ShadowRaidLoud.Time2FirstSpawn = {easy = 60,
+ShadowRaidLoud.Time2FirstSpawn = {
 	normal = 60,
 	hard = 60,
 	overkill = 40,
 	overkill_145 = 40,
 	overkill_290 = 30
 }
-ShadowRaidLoud.Time2RepeatSpawn = {easy = 3,
+ShadowRaidLoud.Time2RepeatSpawn = {
 	normal = 20,
 	hard = 20,
 	overkill = 20,
 	overkill_145 = 20,
 	overkill_290 = 20
 }
-ShadowRaidLoud.Time2OpenVault = {easy = 360,
+ShadowRaidLoud.Time2OpenVault = {
 	normal = 360,
 	hard = 480,
 	overkill = 480,
 	overkill_145 = 480,
 	overkill_290 = 600
 }
-ShadowRaidLoud._Spawning = {easy = 1,
+ShadowRaidLoud._Spawning = {
 	normal = 2,
 	hard = 2,
 	overkill = 2,
 	overkill_145 = 2,
 	overkill_290 = 2
 }
-ShadowRaidLoud._Spawning_Total = {easy = 40,
+ShadowRaidLoud._Spawning_Total = {
 	normal = 50,
 	hard = 60,
 	overkill = 60,
@@ -45,7 +45,6 @@ ShadowRaidLoud._Spawning_Total = {easy = 40,
 }
 ShadowRaidLoud._Spawning_Other_Total = {
 	sniper = {
-		easy = 5,
 		normal = 5,
 		hard = 5,
 		overkill = 5,
@@ -53,7 +52,6 @@ ShadowRaidLoud._Spawning_Other_Total = {
 		overkill_290 = 5
 	},
 	taser = {
-		easy = 2,
 		normal = 4,
 		hard = 4,
 		overkill = 4,
@@ -61,7 +59,6 @@ ShadowRaidLoud._Spawning_Other_Total = {
 		overkill_290 = 6
 	},
 	shield = {
-		easy = 10,
 		normal = 20,
 		hard = 20,
 		overkill = 30,
@@ -69,7 +66,6 @@ ShadowRaidLoud._Spawning_Other_Total = {
 		overkill_290 = 30
 	},
 	spooc = {
-		easy = 2,
 		normal = 2,
 		hard = 2,
 		overkill = 3,
@@ -77,7 +73,6 @@ ShadowRaidLoud._Spawning_Other_Total = {
 		overkill_290 = 5
 	},
 	tank = {
-		easy = 2,
 		normal = 3,
 		hard = 4,
 		overkill = 5,
@@ -86,7 +81,7 @@ ShadowRaidLoud._Spawning_Other_Total = {
 	}
 }
 
-ShadowRaidLoud.Difficulty = Global.game_settings and Global.game_settings.difficulty or "easy"
+ShadowRaidLoud.Difficulty = Global.game_settings and Global.game_settings.difficulty or "normal"
 
 local _D = ShadowRaidLoud.Difficulty
 
@@ -95,6 +90,8 @@ ShadowRaidLoud.Time4Use = {
 	RepeatSpawn = ShadowRaidLoud.Time2RepeatSpawn[_D],
 	OpenVault = ShadowRaidLoud.Time2OpenVault[_D],
 }
+
+ShadowRaidLoud.Unit_Remove_When_Loud = {}
 
 --Spawn_Settings
 	local _default_enemy = {
@@ -108,7 +105,7 @@ ShadowRaidLoud.Time4Use = {
 		group_id = 1,
 		position = {Vector3(3872, 2750, 978), Vector3(3872, 2850, 978), Vector3(3872, 2950, 978), Vector3(3872, 3050, 978), Vector3(3872, 3150, 978)},
 		rotation = {Rotation(0, 0, 1)},
-		enemy = {easy = _default_enemy,
+		enemy = {
 				normal = _default_enemy,
 				hard = _default_enemy,
 				overkill = _default_enemy,
@@ -151,6 +148,21 @@ ShadowRaidLoud.Time4Use = {
 	Spawn_Settings.warehouse_roof_002.group_id = 8
 	Spawn_Settings.warehouse_roof_002.position = {Vector3(-725, -2075, 1776), Vector3(-625, -2075, 1776), Vector3(-550, -2075, 1776), Vector3(-475, -2075, 1776)}
 	table.insert(Spawn_Settings_List, "warehouse_roof_002")
+	
+	Spawn_Settings.back_left_escape_001 = deep_clone(Spawn_Settings.front_right_side_group)
+	Spawn_Settings.back_left_escape_001.group_id = 14
+	Spawn_Settings.back_left_escape_001.position = {Vector3(2018, -6732, 577), Vector3(2018, -6496, 577), Vector3(1755, -6496, 578)}
+	table.insert(Spawn_Settings_List, "back_left_escape_001")
+	
+	Spawn_Settings.back_left_escape_002 = deep_clone(Spawn_Settings.front_right_side_group)
+	Spawn_Settings.back_left_escape_002.group_id = 15
+	Spawn_Settings.back_left_escape_002.position = {Vector3(-3983, -5732, 577), Vector3(-3679, -5975, 577), Vector3(-3436, -6099, 577)}
+	table.insert(Spawn_Settings_List, "back_left_escape_002")
+	
+	Spawn_Settings.back_left_escape_003 = deep_clone(Spawn_Settings.front_right_side_group)
+	Spawn_Settings.back_left_escape_003.group_id = 16
+	Spawn_Settings.back_left_escape_003.position = {Vector3(-4752, -2868, 977), Vector3(-4199, -4485, 577), Vector3(-5131, -5299, 577)}
+	table.insert(Spawn_Settings_List, "back_left_escape_003")
 	
 	local _other_position = {Vector3(6080, 3402, 959), Vector3(-4940, 2365, 977), Vector3(-4941, -1474, 977), Vector3(-2756, -7415, 586.768), Vector3(-3693, -1303, 1391), Vector3(1453, 2365, 977), Vector3(-3745, -3499, 1791), Vector3(-1057, -4406, 1791), Vector3(-5328, -5730, 592)}
 
@@ -264,4 +276,16 @@ function ShadowRaidLoud:_full_function_spawn(name, pos, rot, delay)
 		_u:brain():on_reload()
 		_u:movement():set_character_anim_variables()
 	end)
+end
+
+ShadowRaidLoud.Run_Script_Data = {}
+
+function ShadowRaidLoud:Run_Script(id_strings, them, id, element, instigator, delay)
+	ShadowRaidLoud.Run_Script_Data[id_strings] = {
+		them = them,
+		id = id,
+		element = element,
+		instigator = instigator,
+		delay = delay + 0.1 + ShadowRaidLoud.Now_Time
+	}
 end
