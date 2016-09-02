@@ -17,7 +17,7 @@ function MissionScriptElement.on_executed(self, instigator, alternative, skip_ex
 			if element then				
 				local msg = "[System] Vault will open in ".. ShadowRaidLoud.Time4Use.OpenVault .." seconds"
 				ShadowRaidLoud:Announce(msg)
-				ShadowRaidLoud:Run_Script("id_100964", self, 100964, element, instigator, 10)
+				ShadowRaidLoud:Run_Script("id_100964", self, 100964, element, instigator, ShadowRaidLoud.Time4Use.OpenVault)
 			end
 		end
 	end
