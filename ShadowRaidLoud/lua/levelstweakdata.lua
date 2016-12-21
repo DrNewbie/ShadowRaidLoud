@@ -1,6 +1,5 @@
 local _f_init = LevelsTweakData.init
 
-function LevelsTweakData:init()
-	_f_init(self)	
-	self.kosugi.music = self.shoutout_raid.music
-end
+Hooks:PostHook(LevelsTweakData, "init", "ShadowRaidLoud_Set_Music", function(lvl, ...)
+	lvl.kosugi.music = lvl.shoutout_raid.music
+end)

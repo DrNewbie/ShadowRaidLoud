@@ -275,45 +275,48 @@ function ShadowRaidLoud:Announce(msg)
 	managers.chat:send_message(ChatManager.GAME, "" , msg or "")
 end
 
-function set_team(unit)
-	local team = unit:base():char_tweak().access == "gangster" and "gangster" or "combatant"
-	local AIState = managers.groupai:state()
-	local team_id = tweak_data.levels:get_default_team_ID(team)
-	unit:movement():set_team(AIState:team_data(team_id))
+ShadowRaidLoud._Delay2Spawn = ShadowRaidLoud._Delay2Spawn or {}
+
+function ShadowRaidLoud:_delay_function_spawn(name, pos, rot, delay)
+	delay = delay or 0.5
+	table.insert(self._Delay2Spawn, {name = name, pos = pos, rot = rot, delay = self.Now_Time + delay + 0.5})
 end
 
-function ShadowRaidLoud:_full_function_spawn(name, pos, rot, delay)
-	delay = delay or 1
-	local _nowslot = math.random(1, 100)
-	DelayedCalls:Add("DelayedCalls_ShadowRaidLoud_full_function_spawn_" .. _nowslot, delay, function()
-		local _player_unit = {}
-		for _, data in pairs(managers.groupai:state():all_criminals() or {}) do
-			table.insert(_player_unit, data.unit)
-		end
-		local _final_unit_to_use = _player_unit[math.random(table.size(_player_unit))] or {}
-		local new_objective = {
-				type = "follow",
-				follow_unit = _final_unit_to_use,
-				scan = true,
-				is_default = true
-			}
-		pos = pos + Vector3(0, 0, 10)
-		local _u = World:spawn_unit(name, pos, rot)
-		set_team(_u)
-		_u:brain():set_spawn_ai( { init_state = "idle", params = { scan = true }, objective = new_objective } )
-		_u:brain():on_reload()
-		_u:movement():set_character_anim_variables()
-	end)
+function ShadowRaidLoud:_full_function_spawn(name, pos, rot)
+	local _player_unit = {}
+	for _, data in pairs(managers.groupai:state():all_criminals() or {}) do
+		table.insert(_player_unit, data.unit)
+	end
+	local _final_unit_to_use = _player_unit[math.random(table.size(_player_unit))] or {}
+	local new_objective = {
+			type = "follow",
+			follow_unit = _final_unit_to_use,
+			scan = true,
+			is_default = true
+		}
+	pos = pos + Vector3(0, 0, 10)
+	local _u = World:spawn_unit(name, pos, rot)
+	local _set_team = function (unit)
+		local team = unit:base():char_tweak().access == "gangster" and "gangster" or "combatant"
+		local AIState = managers.groupai:state()
+		local team_id = tweak_data.levels:get_default_team_ID(team)
+		unit:movement():set_team(AIState:team_data(team_id))
+	end
+	_set_team(_u)
+	_u:brain():set_spawn_ai( { init_state = "idle", params = { scan = true }, objective = new_objective } )
+	_u:brain():on_reload()
+	_u:movement():set_character_anim_variables()
 end
 
-ShadowRaidLoud.Run_Script_Data = {}
+ShadowRaidLoud.Run_Script_Data = ShadowRaidLoud.Run_Script_Data or {}
 
 function ShadowRaidLoud:Run_Script(id_strings, them, id, element, instigator, delay)
-	ShadowRaidLoud.Run_Script_Data[id_strings] = {
+	self.Run_Script_Data[id_strings] = {
 		them = them,
 		id = id,
 		element = element,
 		instigator = instigator,
-		delay = delay + 0.1 + ShadowRaidLoud.Now_Time
+		delay = delay + 0.1 + self.Now_Time
 	}
+	return self.Run_Script_Data[id_strings]
 end

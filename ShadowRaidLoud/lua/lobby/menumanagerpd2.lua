@@ -4,17 +4,17 @@ end
 
 _G.ShadowRaidLoud = _G.ShadowRaidLoud or {}
 
-local _f_start_single_player_job = MenuCallbackHandler.start_single_player_job
-local _f_start_job = MenuCallbackHandler.start_job
+local ShadowRaidLoud_start_single_player_job = MenuCallbackHandler.start_single_player_job
+local ShadowRaidLoud_start_job = MenuCallbackHandler.start_job
 
 function MenuCallbackHandler:start_single_player_job(...)
 	managers.menu:show_ShadowRaidLoud_warning()
-	return _f_start_single_player_job(self, ...)
+	return ShadowRaidLoud_start_single_player_job(self, ...)
 end
 
 function MenuCallbackHandler:start_job(...)
 	managers.menu:show_ShadowRaidLoud_warning()
-	return _f_start_job(self, ...)
+	return ShadowRaidLoud_start_job(self, ...)
 end
 
 function MenuManager:show_ShadowRaidLoud_warning()

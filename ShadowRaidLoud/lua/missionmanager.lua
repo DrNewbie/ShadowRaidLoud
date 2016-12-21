@@ -4,9 +4,7 @@ end
 
 _G.ShadowRaidLoud = _G.ShadowRaidLoud or {}
 
-local _missino_init_orig = MissionManager.init
-function MissionManager:init(...)
-	_missino_init_orig(self, ...)
+Hooks:PostHook(MissionManager, "init", "ShadowRaidLoud_Is_OK_Enable", function(miss, ...)
 	if Network:is_client() then
 		return
 	end
@@ -15,4 +13,4 @@ function MissionManager:init(...)
 	else
 		ShadowRaidLoud.Enable = false
 	end
-end
+end)

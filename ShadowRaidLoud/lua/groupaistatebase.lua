@@ -4,7 +4,7 @@ end
 
 _G.ShadowRaidLoud = _G.ShadowRaidLoud or {}
 
-local _f_GroupAIStateBase_update_point_of_no_return = GroupAIStateBase._update_point_of_no_return
+local ShadowRaidLoud_Disable_No_Return = GroupAIStateBase._update_point_of_no_return
 
 function GroupAIStateBase:_update_point_of_no_return(...)
 	if ShadowRaidLoud and ShadowRaidLoud.Enable and ShadowRaidLoud.Timer_Enable then
@@ -14,5 +14,5 @@ function GroupAIStateBase:_update_point_of_no_return(...)
 		managers.network.matchmake:set_server_joinable(true)
 		return
 	end
-	_f_GroupAIStateBase_update_point_of_no_return(self, ...)
+	ShadowRaidLoud_Disable_No_Return(self, ...)
 end
