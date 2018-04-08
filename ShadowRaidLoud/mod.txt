@@ -3,7 +3,7 @@
 	"description": "Shadow Raid will be able to go loud",
 	"author": "Dr_Newbie",
 	"contact": "http://modwork.shop/15659",
-	"version": "10",
+	"version": "11",
 	"blt_version": 2,
 	"priority": 100,
 	"hooks" : [
