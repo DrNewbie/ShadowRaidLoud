@@ -2,6 +2,12 @@ if Network:is_client() then
 	return
 end
 
+local ShadowRaidLoud_ModPath = ModPath
+
+if ModCore then
+	ModCore:new(ShadowRaidLoud_ModPath .. "config.xml", true, true)
+end
+
 _G.ShadowRaidLoud = _G.ShadowRaidLoud or {}
 
 ShadowRaidLoud.Level_ID = "kosugi"
@@ -49,9 +55,9 @@ ShadowRaidLoud._Spawning_Total = {
 	hard = 60,
 	overkill = 60,
 	overkill_145 = 70,
-	easy_wish = 70,
-	overkill_290 = 70,
-	sm_wish = 70
+	easy_wish = 90,
+	overkill_290 = 90,
+	sm_wish = 90
 }
 ShadowRaidLoud._Spawning_Other_Total = {
 	sniper = {
@@ -76,11 +82,11 @@ ShadowRaidLoud._Spawning_Other_Total = {
 		easy = 10,
 		normal = 20,
 		hard = 20,
-		overkill = 30,
-		overkill_145 = 30,
-		easy_wish = 30,
-		overkill_290 = 30,
-		sm_wish = 30
+		overkill = 20,
+		overkill_145 = 20,
+		easy_wish = 20,
+		overkill_290 = 20,
+		sm_wish = 20
 	},
 	spooc = {
 		normal = 2,
@@ -92,6 +98,15 @@ ShadowRaidLoud._Spawning_Other_Total = {
 		sm_wish = 5
 	},
 	tank = {
+		normal = 3,
+		hard = 4,
+		overkill = 5,
+		overkill_145 = 6,
+		easy_wish = 6,
+		overkill_290 = 8,
+		sm_wish = 8
+	},
+	medic = {
 		normal = 3,
 		hard = 4,
 		overkill = 5,
@@ -241,23 +256,24 @@ ShadowRaidLoud.Unit_Remove_When_Loud = {}
 		shield = {amount = 3, name = {Idstring("units/payday2/characters/ene_shield_1/ene_shield_1")}},
 		spooc = {amount = 1, name = {Idstring("units/payday2/characters/ene_spook_1/ene_spook_1")}},
 		tank = {amount = 1, name = {Idstring("units/payday2/characters/ene_bulldozer_1/ene_bulldozer_1")}},
-		
+		medic = {amount = 2, name = {Idstring("units/payday2/characters/ene_medic_r870/ene_medic_r870"), Idstring("units/payday2/characters/ene_medic_m4/ene_medic_m4")}},		
 		pos_default = {},
 	}
 	if _D ~= "easy" and _D ~= "normal" then
 		table.insert(ShadowRaidLoud.Spawning_Other.shield.name, Idstring("units/payday2/characters/ene_shield_2/ene_shield_2"))
 		table.insert(ShadowRaidLoud.Spawning_Other.tank.name, Idstring("units/payday2/characters/ene_bulldozer_2/ene_bulldozer_2"))
 	end
-	if _D == "overkill_290" then
+	if _D == "easy_wish" or _D == "overkill_290" then
+		table.insert(ShadowRaidLoud.Spawning_Other.tank.name, Idstring("units/pd2_dlc_drm/characters/ene_bulldozer_medic/ene_bulldozer_medic"))
 		table.insert(ShadowRaidLoud.Spawning_Other.tank.name, Idstring("units/payday2/characters/ene_bulldozer_3/ene_bulldozer_3"))
+		table.insert(ShadowRaidLoud.Spawning_Other.tank.name, Idstring("units/pd2_dlc_drm/characters/ene_bulldozer_minigun/ene_bulldozer_minigun"))
 	end
 	if _D == "sm_wish" then
 		table.insert(ShadowRaidLoud.Spawning_Other.spooc.name, Idstring("units/pd2_dlc_gitgud/characters/ene_zeal_cloaker/ene_zeal_cloaker"))
 		table.insert(ShadowRaidLoud.Spawning_Other.shield.name, Idstring("units/pd2_dlc_gitgud/characters/ene_zeal_swat_shield/ene_zeal_swat_shield"))
 		table.insert(ShadowRaidLoud.Spawning_Other.shield.name, Idstring("units/pd2_dlc_gitgud/characters/ene_zeal_swat_shield/ene_zeal_swat_shield"))
-		table.insert(ShadowRaidLoud.Spawning_Other.tank.name, Idstring("units/pd2_dlc_gitgud/characters/ene_zeal_bulldozer_2/ene_zeal_bulldozer_2"))
-		table.insert(ShadowRaidLoud.Spawning_Other.tank.name, Idstring("units/pd2_dlc_gitgud/characters/ene_zeal_bulldozer_3/ene_zeal_bulldozer_3"))
-		table.insert(ShadowRaidLoud.Spawning_Other.tank.name, Idstring("units/pd2_dlc_gitgud/characters/ene_zeal_bulldozer/ene_zeal_bulldozer"))
+		table.insert(ShadowRaidLoud.Spawning_Other.tank.name, Idstring("units/pd2_dlc_drm/characters/ene_bulldozer_medic/ene_bulldozer_medic"))
+		table.insert(ShadowRaidLoud.Spawning_Other.tank.name, Idstring("units/pd2_dlc_drm/characters/ene_bulldozer_minigun/ene_bulldozer_minigun"))
 	end
 	for _, v in pairs(ShadowRaidLoud.Spawn_Settings) do
 		if not v.POSNOADD then

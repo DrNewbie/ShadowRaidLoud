@@ -1,8 +1,11 @@
 {
 	"name":"Shadow Raid Loud",
-	"author":"Dr_Newbie",
-	"contact":" ",
-	"version":"7",
+	"description": "Shadow Raid will be able to go loud",
+	"author": "Dr_Newbie",
+	"contact": "http://modwork.shop/15659",
+	"version": "10",
+	"blt_version": 2,
+	"priority": 100,
 	"hooks" : [
 		{ "hook_id":"lib/managers/localizationmanager", "script_path":"lua/function/timer_main.lua" },
 		{ "hook_id":"lib/managers/localizationmanager", "script_path":"lua/function/setting.lua" },

@@ -120,12 +120,16 @@ function ShadowRaidLoud:Timer_Main(t)
 			if _enemy_type_amount["sniper"] < self._Spawning_Other_Total["sniper"][_D] then
 				local _pos_sniper = self.Spawning_Other.sniper.pos
 				self:_delay_function_spawn(Idstring("units/payday2/characters/ene_sniper_2/ene_sniper_2"), _pos_sniper[math.random(#_pos_sniper)], Rotation(0, 0, 1))
+				if _D == "sm_wish" then
+					self:_delay_function_spawn(Idstring("units/payday2/characters/ene_sniper_2/ene_sniper_2"), _pos_sniper[math.random(#_pos_sniper)], Rotation(0, 0, 1))
+				end
 			end
 			local _other = {
 				taser = self.Spawning_Other.taser,
 				shield = self.Spawning_Other.shield,
 				spooc = self.Spawning_Other.spooc,
 				tank = self.Spawning_Other.tank,
+				medic = self.Spawning_Other.medic,
 			}
 			local _list
 			local _pos_other = self.Spawning_Other.pos_default
@@ -141,7 +145,7 @@ function ShadowRaidLoud:Timer_Main(t)
 					end
 				end
 			end
-			math.randomseed(os.time())
+			math.randomseed(tostring(os.time()):reverse():sub(1, 6))  
 		end
 	end
 	if self.Run_Script_Data then
