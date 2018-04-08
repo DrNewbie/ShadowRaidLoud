@@ -1,5 +1,5 @@
 <mod name="Shadow Raid Loud">
-	<AssetUpdates id="15659" version="7" provider="modworkshop" use_local_dir="true" use_local_path="true"/>
+	<AssetUpdates id="15659" version="10" provider="modworkshop" use_local_dir="true" use_local_path="true"/>
 	<AddFiles directory="assets">
 		<nav_data path="levels/narratives/bain/shadow_raid/nav_manager_data" force="true"/>
 	</AddFiles>
